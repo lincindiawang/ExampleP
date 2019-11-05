@@ -12,12 +12,15 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView name;
     private TextView password;
+    private ImageView result;
+    private ImageView wrong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         name = findViewById(R.id.ed_name);
         password = findViewById(R.id.ed_password);
+        result = findViewById(R.id.image_result);
+        wrong = findViewById(R.id.image_wrong);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -43,10 +48,18 @@ public class MainActivity extends AppCompatActivity {
                     .setMessage("Your name have to be less than 6 letters")
                     .setPositiveButton("OK", null)
                     .show();
+            result.setImageResource(R.drawable.wrong);
+
         } else if (password.length() < 5) {
             new AlertDialog.Builder(MainActivity.this)
-                    .setMessage("Your password have to be more than 5 words")
+                    .setMessage("Your password have to be more than 5 letters")
                     .setPositiveButton("OK", null)
+                    .show();
+            wrong.setImageResource(R.drawable.wrong);
+        } else{
+            new AlertDialog.Builder(MainActivity.this)
+                    .setMessage(" Hello~ "+ name.getText().toString())
+                    .setPositiveButton("Start",null)
                     .show();
         }
     }
