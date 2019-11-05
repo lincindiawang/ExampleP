@@ -3,7 +3,6 @@ package com.linda.example;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView result;
     private ImageView wrong;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
         name = findViewById(R.id.ed_name);
         password = findViewById(R.id.ed_password);
         result = findViewById(R.id.image_result);
-        wrong = findViewById(R.id.image_wrong);
+        wrong = findViewById(R.id.image_v);
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -43,24 +44,47 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void Button(View view) {
+//        result.setAlpha(0.8f);
+//
+//
+//        wrong.setAlpha(0.8f);
+        result.setVisibility(View.VISIBLE);
+        wrong.setVisibility(View.VISIBLE);
+
+
         if (name.length() > 6) {
+//            result.setImageResource(R.drawable.erro);
             new AlertDialog.Builder(MainActivity.this)
                     .setMessage("Your name have to be less than 6 letters")
                     .setPositiveButton("OK", null)
                     .show();
-            result.setImageResource(R.drawable.wrong);
+            result.setImageResource(R.drawable.erro);
 
         } else if (password.length() < 5) {
+//            wrong.setImageResource(R.drawable.erro);
             new AlertDialog.Builder(MainActivity.this)
                     .setMessage("Your password have to be more than 5 letters")
                     .setPositiveButton("OK", null)
                     .show();
-            wrong.setImageResource(R.drawable.wrong);
-        } else{
+            wrong.setImageResource(R.drawable.erro);
+
+
+//        } else if(name.length() > 6 && password.length() < 5){
+//            new AlertDialog.Builder(MainActivity.this)
+//                    .setMessage("Your name have to be less than 6 letters and password have to be more than 5 letters")
+//                    .setPositiveButton("OK", null)
+//                    .show();
+//            result.setImageResource(R.drawable.erro);
+//            wrong.setImageResource(R.drawable.erro);
+
+        }else{
             new AlertDialog.Builder(MainActivity.this)
                     .setMessage(" Hello~ "+ name.getText().toString())
                     .setPositiveButton("Start",null)
                     .show();
+            result.setVisibility(View.INVISIBLE);
+            wrong.setVisibility(View.INVISIBLE);
+
         }
     }
 
